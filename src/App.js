@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {pokemon:{}}
+      }
+   
+
+  async componentDidMount () {
+    const response = await fetch (`https://pokeapi.co/api/v2/pokemon?limit=11`)
+    const json = await response.json()
+    console.log(json.name)
+    this.setState ({pokemon:json})
+  }
+  
+  
+render() {
+  console.log(this.state.pokemon)
+  return(<div>
+    {this.state.pokemon.name}
+  </div>)
+  }
+  
 }
 
 export default App;
+
+
+// async callApi(){
+  //   try {
+  //     console.log('succeeded')
+  //     const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150/`)
+  //     const json = await response.json()
+  //     // this.setState(pokemon(json));
+  //     console.log(json.name)
+  //   } catch(e){
+  //     console.log(e)
+  //   }
+  // }
+        
+  //     return <div> {json[0]} </div>
+    
+        
+    // catch(e) {
+    //   console.log(e)
+  
